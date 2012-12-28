@@ -1120,7 +1120,9 @@ NSString * RKStringDescribingTransitionFromTableControllerStateToState(RKTableCo
 {
     NSCachedURLResponse *cachedresponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:self.request];
     NSHTTPURLResponse *response = (NSHTTPURLResponse *)[cachedresponse response];
-    return [[(NSHTTPURLResponse *)response allHeaderFields] objectForKey:@"Date"];
+    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+    NSString *dateString = [[(NSHTTPURLResponse *) response allHeaderFields] objectForKey:@"Date"];
+    return [dateFormatter dateFromString:dateString];
 }
 
 - (NSDate *)pullToRefreshDataSourceLastUpdated:(UIGestureRecognizer *)gesture
